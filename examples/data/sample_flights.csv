@@ -1,0 +1,4 @@
+flight_id,date,gate_time,pax_count,mix_business_share
+TK123,2025-11-03,15:00,180,0.35
+TK987,2025-11-03,16:00,150,0.20
+LH333,2025-11-03,18:30,220,0.40

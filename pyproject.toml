@@ -1,0 +1,75 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hospops-forecast"
+version = "0.3.0"
+description = "Operational demand & workforce forecasting for hospitality & airline ops."
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+authors = [{ name="HospOps-Forecast Contributors"}]
+keywords = ["hospitality", "forecasting", "workforce", "airline", "SLA", "fastapi"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Framework :: FastAPI",
+  "Framework :: Streamlit",
+  "Intended Audience :: Hospitality Industry",
+]
+
+dependencies = [
+  "pandas>=2.0",
+  "numpy>=1.23",
+  "scikit-learn>=1.3",
+  "statsmodels>=0.13",
+  "typer>=0.12",
+  "rich>=13.7",
+  "PyYAML>=6.0",
+  "pydantic>=2.6",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=7.4",
+  "black>=23.7",
+  "ruff>=0.3",
+  "mypy>=1.10",
+  "pre-commit>=3.7",
+]
+app = [
+  "streamlit>=1.33",
+  "matplotlib>=3.7",
+]
+api = [
+  "fastapi>=0.110",
+  "uvicorn>=0.29",
+]
+dq = [
+  "great_expectations>=0.18",
+]
+timeseries = [
+  "prophet>=1.1",
+  "cmdstanpy>=1.2",
+]
+
+[project.scripts]
+hospops-forecast = "hospops_forecast.cli:app"
+
+[tool.black]
+line-length = 100
+
+[tool.ruff]
+line-length = 100
+select = ["E","F","I","UP"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.10"
+warn_unused_ignores = true
+warn_redundant_casts = true
+
+[tool.pytest.ini_options]
+addopts = "-q"
+python_files = "test_*.py"

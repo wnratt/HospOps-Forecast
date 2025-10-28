@@ -1,0 +1,103 @@
+housekeeping:
+  minutes_per_checkout: 45
+  minutes_per_stayover: 20
+  target_utilization: 0.85
+  default_shift_hours: 8
+  archetype_multipliers:
+    SoloBusiness: 1.00
+    LeisureCouple: 1.15
+    FamilyWithKids: 1.80
+    TourGroup: 1.30
+    Other: 1.10
+
+# Advanced F&B meals
+fnb_meals:
+  breakfast:
+    base:
+      croissant_units: {adult: 0.8, child: 0.4}
+      orange_juice_liters: {adult: 0.25, child: 0.15}
+      eggs_kg: {adult: 0.12, child: 0.08}
+    multipliers:
+      SoloBusiness: {croissant_units: 0.8, orange_juice_liters: 0.9, eggs_kg: 0.9}
+      LeisureCouple: {croissant_units: 1.2, orange_juice_liters: 1.1, eggs_kg: 1.1}
+      FamilyWithKids: {croissant_units: 1.4, orange_juice_liters: 1.3, eggs_kg: 1.2}
+      TourGroup: {croissant_units: 0.9, orange_juice_liters: 1.0, eggs_kg: 0.95}
+      Other: {croissant_units: 1.0, orange_juice_liters: 1.0, eggs_kg: 1.0}
+  lunch:
+    base:
+      main_course_portions: {adult: 1.0, child: 0.6}
+      salad_kg: {adult: 0.18, child: 0.10}
+      soft_drink_liters: {adult: 0.30, child: 0.20}
+    multipliers:
+      SoloBusiness: {main_course_portions: 0.9, salad_kg: 0.9, soft_drink_liters: 0.9}
+      LeisureCouple: {main_course_portions: 1.1, salad_kg: 1.1, soft_drink_liters: 1.1}
+      FamilyWithKids: {main_course_portions: 1.3, salad_kg: 1.0, soft_drink_liters: 1.4}
+      TourGroup: {main_course_portions: 1.1, salad_kg: 1.0, soft_drink_liters: 1.0}
+      Other: {main_course_portions: 1.0, salad_kg: 1.0, soft_drink_liters: 1.0}
+  dinner:
+    base:
+      main_course_portions: {adult: 1.0, child: 0.7}
+      dessert_units: {adult: 0.6, child: 0.8}
+      water_liters: {adult: 0.5, child: 0.3}
+    multipliers:
+      SoloBusiness: {main_course_portions: 0.9, dessert_units: 0.5, water_liters: 0.9}
+      LeisureCouple: {main_course_portions: 1.1, dessert_units: 1.2, water_liters: 1.0}
+      FamilyWithKids: {main_course_portions: 1.3, dessert_units: 1.5, water_liters: 1.2}
+      TourGroup: {main_course_portions: 1.1, dessert_units: 0.9, water_liters: 1.0}
+      Other: {main_course_portions: 1.0, dessert_units: 1.0, water_liters: 1.0}
+
+service_load:
+  reception:
+    transactions_per_agent_per_hour: 12
+    utilization: 0.85
+    distributions:
+      SoloBusiness: {"12:00": 0.05, "14:00": 0.30, "15:00": 0.35, "17:00": 0.20, "19:00": 0.10}
+      LeisureCouple: {"12:00": 0.05, "14:00": 0.20, "15:00": 0.30, "16:00": 0.25, "18:00": 0.20}
+      FamilyWithKids: {"11:00": 0.05, "14:00": 0.25, "16:00": 0.35, "17:00": 0.20, "18:00": 0.15}
+      TourGroup: {"15:00": 0.60, "18:00": 0.40}
+      Other: {"14:00": 0.30, "15:00": 0.30, "16:00": 0.25, "18:00": 0.15}
+  breakfast:
+    covers_per_staff_per_hour: 25
+    utilization: 0.85
+    distributions:
+      SoloBusiness: {"06:30": 0.15, "07:00": 0.35, "07:30": 0.30, "08:00": 0.20}
+      LeisureCouple: {"07:30": 0.20, "08:00": 0.35, "08:30": 0.30, "09:00": 0.15}
+      FamilyWithKids: {"08:00": 0.25, "08:30": 0.35, "09:00": 0.25, "09:30": 0.15}
+      TourGroup: {"07:00": 0.40, "07:30": 0.40, "08:00": 0.20}
+      Other: {"07:30": 0.25, "08:00": 0.35, "08:30": 0.25, "09:00": 0.15}
+
+service_sla:
+  default_target_wait_min: 5.0
+
+departments:
+  spa:
+    minutes_per_treatment: 50
+    treatments_per_guest_day: {SoloBusiness: 0.05, LeisureCouple: 0.08, FamilyWithKids: 0.02, TourGroup: 0.01, Other: 0.03}
+    utilization: 0.8
+  concierge:
+    requests_per_guest_day: {SoloBusiness: 0.10, LeisureCouple: 0.15, FamilyWithKids: 0.12, TourGroup: 0.06, Other: 0.10}
+    minutes_per_request: 8
+    utilization: 0.85
+  valet:
+    cars_per_room_day: {SoloBusiness: 0.30, LeisureCouple: 0.20, FamilyWithKids: 0.25, TourGroup: 0.05, Other: 0.15}
+    minutes_per_transaction: 6
+    utilization: 0.85
+  engineering:
+    tickets_per_room_day: 0.05
+    minutes_per_ticket: 20
+    utilization: 0.8
+
+airline:
+  # simple distributions for pax arrival to areas (relative weights over hour buckets)
+  boarding:
+    pax_per_agent_per_hour: 100
+    sla_target_wait_min: 7
+    distributions: {"-00:30": 0.4, "-00:20": 0.4, "-00:10": 0.2}  # relative to gate_time
+  gate:
+    pax_per_agent_per_hour: 150
+    sla_target_wait_min: 5
+    distributions: {"-00:40": 0.3, "-00:30": 0.5, "-00:20": 0.2}
+  lounge:
+    pax_per_agent_per_hour: 40
+    sla_target_wait_min: 6
+    distributions: {"-01:30": 0.2, "-01:00": 0.5, "-00:30": 0.3}
