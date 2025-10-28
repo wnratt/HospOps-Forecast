@@ -1,0 +1,17 @@
+__pycache__/
+*.py[cod]
+*$py.class
+build/
+dist/
+*.egg-info/
+.env
+.venv
+venv/
+.ipynb_checkpoints
+.DS_Store
+Thumbs.db
+.streamlit/
+.coverage
+htmlcov/
+.vscode/
+.ge/
